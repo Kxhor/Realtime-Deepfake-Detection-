@@ -1,0 +1,16 @@
+venv/
+__pycache__/
+*.pyc
+*.pyo
+db.sqlite3
+*.env
+det_model/keras_extracted/
+det_model/deepfake_detection_model.keras
+det_model/quantised_model.tflite
+deepfake-detection-model/
+convert_model.py
+check_cnn.py
+check_layers.py
+media/uploads/
+media/videos/
+Procfile.txt

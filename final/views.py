@@ -7,8 +7,7 @@ from det_model.videodet import predict_video  # Import your deepfake detection f
 from predict_livestream import capture_youtube_stream, get_embed_url
 import os
 from django.conf import settings
-from code import get_detection_result, process_file
-
+from blockchain import get_detection_result, process_file
 # Home view
 def home(request):
     return render(request, "main/base.html", {})

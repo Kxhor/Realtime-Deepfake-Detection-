@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,16 +25,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-5kz!$uk+ggohwsmsujdekb3q8idzy9xlx6uwxhr0#$c6!y%s$-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # for Railway
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
+    BASE_DIR / 'static',  # your local static folder
 ]
-MEDIA_ROOT= os.path.join(BASE_DIR,"media/")
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
 
 # Application definition
@@ -106,15 +109,10 @@ connect(
 
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'deepfake',  # Replace with your MongoDB database name
-        'ENFORCE_SCHEMA': False,  # Optional, based on your needs
-        'CLIENT': {
-            'host': 'mongodb://localhost:27017',  # Your MongoDB URI
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
